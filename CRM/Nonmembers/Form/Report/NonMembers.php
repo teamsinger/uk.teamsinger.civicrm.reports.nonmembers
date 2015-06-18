@@ -8,7 +8,7 @@ class CRM_Nonmembers_Form_Report_NonMembers extends CRM_Report_Form {
 
   protected $_summary = NULL;
 
-  protected $_customGroupExtends = array('Membership');
+  protected $_customGroupExtends = array('Contact');
   protected $_customGroupGroupBy = FALSE; function __construct() {
     $this->_columns = array(
       'civicrm_contact' => array(
@@ -45,8 +45,6 @@ class CRM_Nonmembers_Form_Report_NonMembers extends CRM_Report_Form {
             ),
          ),
       ),
-      'civicrm_membership' => array( 'dao' => 'CRM_Member_DAO_Membership' ),
-      'civicrm_membership_status' => array( 'dao' => 'CRM_Member_DAO_MembershipStatus' ),
     );
     $this->_groupFilter = TRUE;
     $this->_tagFilter = FALSE;
@@ -87,14 +85,7 @@ class CRM_Nonmembers_Form_Report_NonMembers extends CRM_Report_Form {
   function from() {
     $this->_from = NULL;
 
-    $this->_from = "
-         FROM  civicrm_contact {$this->_aliases['civicrm_contact']} {$this->_aclFrom}
-               INNER JOIN civicrm_membership {$this->_aliases['civicrm_membership']}
-                          ON {$this->_aliases['civicrm_contact']}.id =
-                             {$this->_aliases['civicrm_membership']}.contact_id AND {$this->_aliases['civicrm_membership']}.is_test = 0
-               LEFT  JOIN civicrm_membership_status {$this->_aliases['civicrm_membership_status']}
-                          ON {$this->_aliases['civicrm_membership_status']}.id =
-                             {$this->_aliases['civicrm_membership']}.status_id ";
+    $this->_from = "FROM  civicrm_contact {$this->_aliases['civicrm_contact']} {$this->_aclFrom}";
 
 
     //used when address field is selected
@@ -163,11 +154,11 @@ class CRM_Nonmembers_Form_Report_NonMembers extends CRM_Report_Form {
   }
 
   function groupBy() {
-    $this->_groupBy = " GROUP BY {$this->_aliases['civicrm_contact']}.id, {$this->_aliases['civicrm_membership']}.membership_type_id";
+    $this->_groupBy = "";
   }
 
   function orderBy() {
-    $this->_orderBy = " ORDER BY {$this->_aliases['civicrm_contact']}.sort_name, {$this->_aliases['civicrm_contact']}.id, {$this->_aliases['civicrm_membership']}.membership_type_id";
+    $this->_orderBy = " ORDER BY {$this->_aliases['civicrm_contact']}.sort_name, {$this->_aliases['civicrm_contact']}.id ";
   }
 
   function postProcess() {
