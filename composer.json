@@ -1,0 +1,17 @@
+{
+    "name": "teamsinger/uk.teamsinger.civicrm.reports.nonmembers",
+    "type": "civicrm-extension",
+    "license": "MIT",
+    "description": "Non-members report for CiviCRM",
+    "homepage": "https://github.com/teamsinger/uk.teamsinger.civicrm.reports.nonmembers",
+    "authors": [
+        {
+            "name": "Tom Singer",
+            "email": "tomsinger@gmail.com",
+            "homepage": "https://github.com/tomsinger"
+        }
+    ],
+    "require": {
+        "composer/installers": "dev-civicrm"
+    }
+}
